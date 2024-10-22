@@ -15,11 +15,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
     User findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
-
     User findByEmail(String email);
-
-
 
     @Query("SELECT u FROM User u WHERE u.id = :id")
     User findByID(@Param("id") Long id);
+
+    
 }

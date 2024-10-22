@@ -84,6 +84,7 @@ public class UserService {
         newObj.setEmail((obj.getEmail() == null) ? newObj.getEmail() : obj.getEmail());
         newObj.setPassword((obj.getPassword() == null) ? newObj.getPassword() : obj.getPassword());
         newObj.setActive((obj.getActive() == null) ? newObj.getActive() : obj.getActive());
+        newObj.setUpdated(new Date());
     }
 
 }
