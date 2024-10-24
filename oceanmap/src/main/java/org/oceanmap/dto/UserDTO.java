@@ -11,15 +11,17 @@ import org.oceanmap.model.User;
 public class UserDTO {
 
     private Long id;
-    private String username;
+    private String name;
     private String email;
     private String password;
+    private Boolean enabled;
 
     public UserDTO(User user) {
         this.id = user.getId();
-        this.username = user.getUsername();
+        this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.enabled = user.getActive();
     }
 
 }
