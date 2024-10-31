@@ -1,7 +1,8 @@
 package org.oceanmap.service;
 import org.oceanmap.dto.UserDTO;
 import org.oceanmap.dto.UserLoged;
-import org.oceanmap.expections.ObjectNotFound;
+import org.oceanmap.exception.ObjectNotFound;
+import org.oceanmap.model.Profile;
 import org.oceanmap.model.User;
 import org.oceanmap.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,8 @@ public class UserService {
                 obj.getPassword(),
                 new Date(),
                 new Date(),
-                Boolean.TRUE
+                Boolean.TRUE,
+                new Profile()
         );
     }
 
