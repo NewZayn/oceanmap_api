@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.oceanmap.model.UserSearchHistory;
+import org.oceanmap.model.SearchHistory;
 import org.oceanmap.model.User;
 
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public class SearchHistoryDTO {
 
     private LocalDateTime searchDate;
 
-    public SearchHistoryDTO(UserSearchHistory userSearchHistory) {
+    public SearchHistoryDTO(SearchHistory userSearchHistory) {
         this.id = userSearchHistory.getId();
         this.user = userSearchHistory.getUser();
         this.beachAddress = userSearchHistory.getBeachAddress();
