@@ -26,6 +26,7 @@ public class UserSearchController {
 
     @PostMapping("/saveSearchHistory")
     public ResponseEntity<SearchHistoryDTO> saveSearchHistory(@RequestBody SearchHistoryDTO searchHistoryDTO, @PathVariable Long userId){
+         searchHistoryDTO.setId(userId);
          SearchHistory searchHistory =  searchHistoryService.fromDTO(searchHistoryDTO);
          searchHistoryService.saveSearchHistory(searchHistory);
          return ResponseEntity.ok().body(new SearchHistoryDTO(searchHistory));

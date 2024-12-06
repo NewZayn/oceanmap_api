@@ -4,6 +4,7 @@ import org.oceanmap.dto.UserLoged;
 import org.oceanmap.exception.ObjectNotFound;
 import org.oceanmap.model.Profile;
 import org.oceanmap.model.User;
+import org.oceanmap.repository.ProfileRepository;
 import org.oceanmap.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
     public void update(User obj) {
         User user = userRepository.findByID(obj.getId());
         updateData(obj, user);
@@ -23,6 +27,9 @@ public class UserService {
     }
 
     public void save(User user) {
+        if (user.getProfile() != null && user.getProfile().getId() == null) {
+            profileRepository.save(user.getProfile());
+        }
         userRepository.save(user);
     }
 
@@ -62,6 +69,9 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO obj) {
+        Profile profile = new Profile();
+
+
         return new User(
                 obj.getId(),
                 obj.getName(),
@@ -70,9 +80,10 @@ public class UserService {
                 new Date(),
                 new Date(),
                 Boolean.TRUE,
-                new Profile()
+                profile
         );
     }
+
 
     public Boolean findByEmail(String email) {
         User user = userRepository.findByEmail(email);
