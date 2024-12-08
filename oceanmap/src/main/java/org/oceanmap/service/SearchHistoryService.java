@@ -4,6 +4,7 @@ package org.oceanmap.service;
 import org.oceanmap.dto.SearchHistoryDTO;
 import org.oceanmap.model.SearchHistory;
 import org.oceanmap.repository.SearchHistoryRepository;
+import org.oceanmap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class SearchHistoryService {
 
     @Autowired
     private SearchHistoryRepository searchHistoryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     public void saveSearchHistory(SearchHistory searchHistory) {
@@ -32,7 +36,7 @@ public class SearchHistoryService {
     public SearchHistory fromDTO (SearchHistoryDTO history){
         return new SearchHistory(
                 history.getId(),
-                history.getUser(),
+                userRepository.findByID(history.getId()),
                 history.getBeachAddress(),
                 history.getSearchDate()
         );

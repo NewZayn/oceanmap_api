@@ -70,6 +70,7 @@ public class UserService {
 
     public User fromDTO(UserDTO obj) {
         Profile profile = new Profile();
+        System.out.println(obj.getName());
 
 
         return new User(

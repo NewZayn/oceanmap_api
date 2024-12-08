@@ -34,6 +34,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserLoged loginDTO) {
         UserDTO loggedDTO = userService.login(loginDTO);
+        System.out.println(loggedDTO);
         if (loggedDTO != null) {
             URI loggedUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/").build().toUri();
             return ResponseEntity.created(loggedUri).body(loggedDTO);
