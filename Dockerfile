@@ -14,7 +14,7 @@ COPY oceanmap/pom.xml .
 RUN mvn dependency:go-offline
 
 # Copia o restante do código-fonte do projeto
-COPY to-do-list/. .
+COPY oceanmap/. .
 
 # Compila o projeto com o Maven
 RUN mvn clean install
