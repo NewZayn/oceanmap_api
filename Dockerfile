@@ -4,19 +4,17 @@ FROM ubuntu:latest AS build
 # Atualiza o sistema e instala o OpenJDK 21 e Maven
 RUN apt-get update && apt-get install -y openjdk-21-jdk maven
 
-# Define o diretório de trabalho como o diretório raiz do projeto
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia o arquivo pom.xml para resolver as dependências
+# Copia o arquivo pom.xml e baixa dependências
 COPY oceanmap/pom.xml .
-
-# Baixa as dependências do Maven
 RUN mvn dependency:go-offline
 
-# Copia o restante do código-fonte do projeto
+# Copia o restante do código-fonte
 COPY oceanmap/. .
 
-# Compila o projeto com o Maven
+# Compila o projeto e cria o JAR
 RUN mvn clean install
 
 # Stage 2: Run
@@ -25,8 +23,8 @@ FROM openjdk:21-jdk-slim
 # Expondo a porta 8080
 EXPOSE 8080
 
-# Copia o arquivo JAR gerado na fase de construção para o novo contêiner
-COPY --from=build /app/target/oceanmap-0.0.1-SNAPSHOT /app/app.jar
+# Copia o JAR gerado para o contêiner final
+COPY --from=build /app/target/oceanmap-0.0.1-SNAPSHOT.jar /app/app.jar
 
-# Define o comando de entrada para iniciar o aplicativo quando o contêiner for executado
+# Define o comando de entrada para iniciar o aplicativo
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
