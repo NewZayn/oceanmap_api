@@ -1,10 +1,7 @@
 package org.oceanmap.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.oceanmap.model.SearchHistory;
 import org.oceanmap.model.User;
 
@@ -14,11 +11,12 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class SearchHistoryDTO {
 
     private Long id;
 
-    private User user;
+    private Long user;
 
     private String beachAddress;
 
@@ -26,7 +24,7 @@ public class SearchHistoryDTO {
 
     public SearchHistoryDTO(SearchHistory userSearchHistory) {
         this.id = userSearchHistory.getId();
-        this.user = userSearchHistory.getUser();
+        this.user = userSearchHistory.getUser().getId();
         this.beachAddress = userSearchHistory.getBeachAddress();
         this.searchDate = userSearchHistory.getSearchDate();
 

@@ -3,11 +3,14 @@ package org.oceanmap.service;
 
 import org.oceanmap.dto.SearchHistoryDTO;
 import org.oceanmap.model.SearchHistory;
+import org.oceanmap.model.User;
 import org.oceanmap.repository.SearchHistoryRepository;
 import org.oceanmap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,11 +37,13 @@ public class SearchHistoryService {
     }
 
     public SearchHistory fromDTO (SearchHistoryDTO history){
+       User user = userRepository.findByID(history.getUser()).orElseThrow(() -> new RuntimeException("User not found"));
+
         return new SearchHistory(
-                history.getId(),
-                userRepository.findByID(history.getId()),
+                null,
+                user,
                 history.getBeachAddress(),
-                history.getSearchDate()
+                LocalDateTime.now()
         );
 
     }

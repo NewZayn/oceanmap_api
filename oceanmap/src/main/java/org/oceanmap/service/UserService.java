@@ -21,7 +21,7 @@ public class UserService {
     private ProfileRepository profileRepository;
 
     public void update(User obj) {
-        User user = userRepository.findByID(obj.getId());
+        User user = userRepository.findByID(obj.getId()).orElseThrow(() -> new ObjectNotFound("User not found"));
         updateData(obj, user);
         userRepository.save(user);
     }

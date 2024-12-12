@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface SearchHistoryRepository extends JpaRepository<SearchHistory, Long> {
 
-    @Query("SELECT u FROM SearchHistory u WHERE u.id = :id")
+    @Query("SELECT u FROM SearchHistory u WHERE u.user.id = :id")
     List<SearchHistory> findAllById(@Param("id") Long id);
 
 }
